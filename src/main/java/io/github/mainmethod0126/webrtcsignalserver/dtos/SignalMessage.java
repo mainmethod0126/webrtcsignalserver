@@ -14,4 +14,10 @@ public class SignalMessage {
     private String roomId;
     private String sdp;
 
+    // offer 의 경우 from 이 필수로 있어야한다
+    private String from;
+
+    // answer 의 경우 to 가 필수로 있어야한다
+    private String to;
+
 }

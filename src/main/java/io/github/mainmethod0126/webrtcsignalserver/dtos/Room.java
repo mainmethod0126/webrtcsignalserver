@@ -2,8 +2,6 @@ package io.github.mainmethod0126.webrtcsignalserver.dtos;
 
 import java.util.List;
 
-import org.springframework.web.socket.WebSocketSession;
-
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,17 +10,33 @@ import lombok.Data;
 public class Room {
 
     private String id;
-    private List<WebSocketSession> attendees;
+    private List<Attendee> attendees;
 
-    public boolean isContain(String sessionId) {
-        return attendees.stream().anyMatch((a) -> {
-            return a.getId().equals(sessionId);
+    public boolean isContainBySessionId(String sessionId) {
+        return attendees.stream().anyMatch((attendee) -> {
+            return attendee.getSession().getId().equals(sessionId);
         });
     }
 
-    public void leave(String sessionId) {
-        attendees.removeIf((attendee) -> {
-            return attendee.getId().equals(sessionId);
+    public boolean isContainByAttendeeId(String attendeeId) {
+        return attendees.stream().anyMatch((attendee) -> {
+            return attendee.getId().equals(attendeeId);
         });
+    }
+
+    public void leaveBySessionId(String sessionId) {
+        if (attendees.removeIf((attendee) -> {
+            return attendee.getSession().getId().equals(sessionId);
+        })) {
+            System.out.println("leave : " + sessionId);
+        }
+    }
+
+    public void leaveByAttendeeId(String attendeeId) {
+        if (attendees.removeIf((attendee) -> {
+            return attendee.getId().equals(attendeeId);
+        })) {
+            System.out.println("leave : " + attendeeId);
+        }
     }
 }

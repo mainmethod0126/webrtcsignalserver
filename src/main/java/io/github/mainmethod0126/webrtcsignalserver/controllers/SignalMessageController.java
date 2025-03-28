@@ -12,8 +12,9 @@ public class SignalMessageController {
 
     private final RoomService roomService;
 
-    public void resolve(String sessionId, SignalMessage signalMessage) {
-        roomService.notifySignalMessage(sessionId, signalMessage);
+    public void resolve(String sessionId, String roomId, SignalMessage signalMessage) {
+
+        roomService.notifySignalMessage(roomId, roomService.getAttendee(roomId, sessionId), signalMessage);
     }
 
 }
