@@ -28,7 +28,7 @@ public class Room {
         if (attendees.removeIf((attendee) -> {
             return attendee.getSession().getId().equals(sessionId);
         })) {
-            System.out.println("leave : " + sessionId);
+            System.out.println("leave SessionId : " + sessionId);
         }
     }
 
@@ -36,7 +36,7 @@ public class Room {
         if (attendees.removeIf((attendee) -> {
             return attendee.getId().equals(attendeeId);
         })) {
-            System.out.println("leave : " + attendeeId);
+            System.out.println("leave AttendeeId : " + attendeeId);
         }
     }
 }

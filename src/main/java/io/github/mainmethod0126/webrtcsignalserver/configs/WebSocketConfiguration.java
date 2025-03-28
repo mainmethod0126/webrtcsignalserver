@@ -71,9 +71,6 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
 
                 QueryParam queryParam = getQueryParams(session.getUri());
                 roomService.join(queryParam.getRoomId(), session, queryParam.getUserId());
-                System.out.println("joined : " + queryParam.getUserId());
-                // URI가 null인 경우 기본값 사용
-                roomService.join("defaultRoom", session, "anonymousUser");
             }
 
             @Override

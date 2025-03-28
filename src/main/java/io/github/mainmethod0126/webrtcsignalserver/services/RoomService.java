@@ -39,11 +39,13 @@ public class RoomService {
             if (value == null) {
                 List<Attendee> attendees = new ArrayList<>();
                 attendees.add(attendee);
+                System.out.println("join roomId : " + roomId + " userId : " + userId);
                 return Room.builder().id(UUID.randomUUID().toString()).attendees(attendees).build();
             } else {
                 // 이미 참석한 userId가 아닐 경우에만 참석자에 추가
                 if (!value.isContainByAttendeeId(userId)) {
                     value.getAttendees().add(attendee);
+                    System.out.println("join roomId : " + roomId + " userId : " + userId);
                 }
 
                 return value;
@@ -87,6 +89,9 @@ public class RoomService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                System.out.println("notify message type : " + signalMessage.getType() + " " + signalMessage.getFrom()
+                        + " -> " + attendee.getId());
             });
         } else { // to 가 명시되어있으면 일치하는 세션ID 한명에게 전달
             room.getAttendees().stream().filter((attendee) -> {
@@ -106,6 +111,9 @@ public class RoomService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                System.out.println("notify message type : " + signalMessage.getType() + " " + signalMessage.getFrom()
+                        + " -> " + attendee.getId());
             });
         }
 
