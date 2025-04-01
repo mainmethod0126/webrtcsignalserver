@@ -5,5 +5,6 @@ public enum WebRTCSignalMessageType {
     OFFER,
     ANSWER,
     PRANSWER,
-    ROLLBACK
+    ROLLBACK,
+    ICECANDIDATE
 }
